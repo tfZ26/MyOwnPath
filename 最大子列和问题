@@ -1,0 +1,31 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+int zuida(int shu, int* pa)
+{
+    int ThisSum = 0, i, MaxSum = 0;
+    for (i = 0; i < shu; i++)
+    {
+        ThisSum += pa[i];//用ThisSum去遍历数组寻找最大子列和，实时将和保存在MaxSum中
+        if (ThisSum > MaxSum)//当一段子列和或者单个数大于MaxSum，MaxSum更新
+        {
+            MaxSum = ThisSum;
+        }
+        else if (ThisSum < 0)//ThisSum计算其中一段子列和或单个数为负时说明此前的子列和无最大值时（有大于0的单个数也已保存在MaxSum），This更新，去遍历此后的数组元素
+        {
+            ThisSum = 0;
+        }
+    }
+    return MaxSum;
+}
+int main(void)
+{
+    int  i, shuchu;
+    int a[8];
+    for (i = 0; i < 8; i++)
+    {
+        scanf("%d", &a[i]);
+    }
+    shuchu = zuida(8, a);
+    printf("%d", shuchu);
+    return 0;
+}
